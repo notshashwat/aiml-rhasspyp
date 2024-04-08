@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Songs</title>
+</head>
+<body>
+    <button id="demo" onclick="sendCommand()">Speak</button>
+    <p id="message"></p>
+    <script>
+        async function sendCommand(){
+            let res = await fetch("http://localhost:4000/intent", {
+                method: "POST",
+                mode: "cors",
+                credentials:"same-origin",
+                referrerPolicy:"no-referrer"
+            }).then((response) => response.json())
+            .then((response) => {
+                document.getElementById("message").innerHTML = JSON.stringify(response.message)
+                return response;
+                
+            })
+            
+           
+        //    console.log(res)
+        }
+    </script>
+</body>
+</html>
